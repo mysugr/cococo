@@ -10,3 +10,11 @@ xcuserdata/
 *.ipa
 *.dSYM.zip
 *.dSY
+derived_data
+
+## fastlane
+fastlane/test_output
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
