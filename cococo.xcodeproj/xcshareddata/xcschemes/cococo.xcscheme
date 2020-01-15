@@ -32,13 +32,23 @@
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D83494D023CDA5E00056A42F"
-            BuildableName = "cococoKit.framework"
-            BlueprintName = "cococoKit"
+            BlueprintIdentifier = "D834952323CE0E5E0056A42F"
+            BuildableName = "libcococoLibrary.a"
+            BlueprintName = "cococoLibrary"
             ReferencedContainer = "container:cococo.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D834953723CE102F0056A42F"
+               BuildableName = "cococoLibraryTests.xctest"
+               BlueprintName = "cococoLibraryTests"
+               ReferencedContainer = "container:cococo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
