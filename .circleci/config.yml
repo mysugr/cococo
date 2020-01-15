@@ -1,0 +1,29 @@
+version: 2.1
+jobs:
+  test:
+    macos:
+      xcode: "11.3.1"
+    environment:
+      FL_OUTPUT_DIR: output
+    steps:
+      - checkout
+      - run: bundle install
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane test
+      - store_artifacts:
+          path: output
+      - store_test_results:
+          path: output/scan
+
+workflows:
+  version: 2.1
+  test:
+    jobs:
+      - test
+      - adhoc:
+          filters:
+            branches:
+              only: develop
+          requires:
+            - test
