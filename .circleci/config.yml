@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  test:
+  build_and_test:
     macos:
       xcode: "11.3.1"
     environment:
@@ -20,10 +20,4 @@ workflows:
   version: 2.1
   test:
     jobs:
-      - test
-      - adhoc:
-          filters:
-            branches:
-              only: develop
-          requires:
-            - test
+      - build_and_test
