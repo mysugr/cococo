@@ -33,4 +33,13 @@ platform :mac do
     )
   end
 
+  lane :build do
+    gym(
+      scheme: "cococo",
+      derived_data_path: "derived_data",
+      destination: "platform=OS X,arch=x86_64",
+      output_directory: "output"
+    )
+  end
+
 end

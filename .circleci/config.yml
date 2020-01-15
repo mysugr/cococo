@@ -1,28 +1,80 @@
 version: 2.1
+
+references:
+  xcode_version: &xcode_version 11.3.0
+
+commands:
+  prepare_for_spm:
+    steps:
+      - run:
+         name: Prepare for Swift Package Manager
+         command: |
+           for ip in $(dig @8.8.8.8 bitbucket.org +short); do ssh-keyscan bitbucket.org,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts
+           xcodebuild -resolvePackageDependencies
+  prepare_and_fastlane:
+    description: "Sets up the environment before starting the given fastlane lane"
+    parameters:
+      lane:
+        type: string
+        default: "test"
+    steps:
+      - run: bundle install
+      - prepare_for_spm
+      - run: 
+          name: Fastlane
+          command: bundle exec fastlane << parameters.lane >>
+          environment:
+            FL_OUTPUT_DIR: output
+  create_github_release:
+    description: "Create Github release and upload binary"
+    steps:
+      - run:
+          name: ghr - create Github release
+          command: |
+            brew install ghr
+            ghr \
+              -t $GITHUB_CI_TOKEN \ 
+              -u $GITHUB_CI_USERNAME \ 
+              -r $CIRCLE_PROJECT_REPONAME \ 
+              -c $CIRCLE_SHA1 \ 
+              -delete \ 
+              -replace \ 
+              $CIRCLE_TAG ./output/
+
 jobs:
   build_and_test:
     macos:
-      xcode: "11.3.0"
-    environment:
-      FL_OUTPUT_DIR: output
+      xcode: *xcode_version
     steps:
       - checkout
-      - run: bundle install
-      - run:
-          name: Prepare for Swift Package Manager
-          command: |
-            for ip in $(dig @8.8.8.8 bitbucket.org +short); do ssh-keyscan bitbucket.org,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts
-            xcodebuild -resolvePackageDependencies
-      - run:
-          name: Fastlane
-          command: bundle exec fastlane test
+      - prepare_and_fastlane:
+          lane: "test"
       - store_artifacts:
           path: output
       - store_test_results:
           path: output/scan
+
+  publish_github_release:
+      macos:
+        xcode: *xcode_version
+      steps:
+        - checkout
+        - prepare_and_fastlane:
+            lane: "build"
+        - create_github_release
+        - store_artifacts:
+            path: output
 
 workflows:
   version: 2.1
   test:
     jobs:
       - build_and_test
+  release:
+    jobs:
+      - publish_github_release:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
