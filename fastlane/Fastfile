@@ -27,6 +27,8 @@ platform :mac do
       derived_data_path: "derived_data",
       destination: "platform=OS X,arch=x86_64",
       clean: true,
+      code_coverage: true,
+      include_simulator_logs: false,
       disable_slide_to_type: false
     )
   end
