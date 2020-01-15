@@ -9,6 +9,11 @@ jobs:
       - checkout
       - run: bundle install
       - run:
+          name: Prepare for Swift Package Manager
+          command: |
+            for ip in $(dig @8.8.8.8 bitbucket.org +short); do ssh-keyscan bitbucket.org,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts
+            xcodebuild -resolvePackageDependencies
+      - run:
           name: Fastlane
           command: bundle exec fastlane test
       - store_artifacts:
