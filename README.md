@@ -1,5 +1,7 @@
 # cococo - **co**de **co**verage **co**nverter from Xcode 11 to SonarQube
 
+[![mysugr](https://circleci.com/gh/mysugr/cococo.svg?style=svg)](https://circleci.com/gh/mySugr/cococo)
+
 cococo is a command line tool to convert Xcode 11's code coverage data to [SonarQube's generic code coverage format](https://docs.sonarqube.org/latest/analysis/generic-test/). It is written in Swift and makes use of multiple threads to speed up the computation. 
 
 ## Usage:
