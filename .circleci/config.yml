@@ -33,12 +33,12 @@ commands:
           command: |
             brew install ghr
             ghr \
-              -t $GITHUB_CI_TOKEN \ 
-              -u $GITHUB_CI_USERNAME \ 
-              -r $CIRCLE_PROJECT_REPONAME \ 
-              -c $CIRCLE_SHA1 \ 
-              -delete \ 
-              -replace \ 
+              -t $GITHUB_CI_TOKEN \
+              -u $CIRCLE_PROJECT_USERNAME \
+              -r $CIRCLE_PROJECT_REPONAME \
+              -c $CIRCLE_SHA1 \
+              -delete \
+              -replace \
               $CIRCLE_TAG ./output/
 
 jobs:
