@@ -14,9 +14,9 @@ OPTIONS:
 ```
 
 ## Example:
-Run the tool for a given `xcresult` archive and exclude `.h` and `.m` files from processing.
+Run the tool for a given `xcresult` archive, exclude `.h` and `.m` files from processing and save the result to `sonarqube-generic-coverage.xml`.
 ```
-cococo myproject.xcresult --excluded .h .m
+cococo myproject.xcresult --excluded .h .m > sonarqube-generic-coverage.xml
 ```
 
 The Xcode 11's `xcresult` archive can be found in the derived data folder:
