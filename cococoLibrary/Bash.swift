@@ -45,6 +45,7 @@ public class Bash {
         let output = String(data: outputData, encoding: .utf8) ?? ""
 		
 		process.waitUntilExit()
+		pipe.fileHandleForReading.closeFile()
 		let status = process.terminationStatus
 		if status == 0 {
 			return output
