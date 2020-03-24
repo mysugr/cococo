@@ -22,9 +22,10 @@ class Cli {
 			)
 			let archive = parser.add(
 				positional: "xcresult",
-				kind: String.self,
+				kind: [String].self,
 				optional: false,
-				usage: "Path to the xcresult",
+                strategy: .upToNextOption,
+				usage: "Multiple paths to xcresult archives",
 				completion: .filename
 			)
 			let excluded = parser.add(
@@ -39,10 +40,10 @@ class Cli {
 			let argsv = Array(CommandLine.arguments.dropFirst())
 			let parsedArguments = try parser.parse(argsv)
 			
-			let archivePath = parsedArguments.get(archive) ?? ""
+			let archivePaths = parsedArguments.get(archive) ?? []
 			let excludedFileExtensions = parsedArguments.get(excluded)
 			
-			let xml = try Converter().convert(archivePath, excludedFileExtensions: excludedFileExtensions)
+			let xml = try Converter().convert(archivePaths, excludedFileExtensions: excludedFileExtensions)
 			io.print(xml)
 			
 		} catch ArgumentParserError.expectedValue(let value) {

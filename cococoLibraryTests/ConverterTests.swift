@@ -20,7 +20,7 @@ class ConverterTests: XCTestCase {
     }
 	
 	func testExample() throws {
-		let result = try sut.convert(XCResultExamples.example, excludedFileExtensions: nil)
+        let result = try sut.convert([XCResultExamples.example], excludedFileExtensions: nil)
 		let expectedResult = try String(contentsOf: XCResultExamples.exampleResult)
 		XCTAssertEqual(result, expectedResult)
 	}
