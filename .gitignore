@@ -20,3 +20,4 @@ fastlane/screenshots
 fastlane/test_output
 build_artifacts
 output
+.build
