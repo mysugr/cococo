@@ -5,6 +5,19 @@ import PackageDescription
 
 let package = Package(
     name: "cococo",
+    platforms: [
+        .macOS(.v10_13),
+    ],
+    products: [
+        .executable(
+            name: "cococo",
+            targets: ["cococo"]
+        ),
+        .library(
+            name: "cococoLibrary",
+            targets: ["cococoLibrary"]
+        )
+    ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-tools-support-core.git", from: "0.1.10"),
     ],
