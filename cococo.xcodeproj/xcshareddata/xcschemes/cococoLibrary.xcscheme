@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D834952323CE0E5E0056A42F"
-               BuildableName = "libcococoLibrary.a"
+               BlueprintIdentifier = "cococo::cococoLibrary"
+               BuildableName = "cococoLibrary.framework"
                BlueprintName = "cococoLibrary"
                ReferencedContainer = "container:cococo.xcodeproj">
             </BuildableReference>
@@ -50,8 +50,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D834952323CE0E5E0056A42F"
-            BuildableName = "libcococoLibrary.a"
+            BlueprintIdentifier = "cococo::cococoLibrary"
+            BuildableName = "cococoLibrary.framework"
             BlueprintName = "cococoLibrary"
             ReferencedContainer = "container:cococo.xcodeproj">
          </BuildableReference>

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SPMUtility
+import TSCUtility
 import cococoLibrary
 
 class Cli {
