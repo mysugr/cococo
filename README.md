@@ -1,3 +1,23 @@
+# ⚠️ This repository is deprecated
+
+Since we use a different approach this script/repo is deprecated and will no longer be maintained.
+I will outline our new approach here since it is probably useful to other people as well.
+
+Instead of using SonarQube's generic code coverage format, we use the `llvm-cov` format which is directly supported. No conversion needed!
+
+-  Merge all .profdata files into one
+  - They are located here: `<derived_data>/Build/ProfileData/*/*.profdata`
+  - Use: `xcrun llvm-profdata merge <paths to profdata> -output <merged_profdata_file>`
+- Collect all relevant binaries to extract code coverage data
+  - They are located here: `<derived_data>/Build/Products/Debug-iphonesimulator/`
+  - Include the `*.app` binary (includes statically-linked frameworks)
+  - Collect remaining dynamic framework binaries (You probably want to exclude external depdencies like pods)
+- Iterate over relevant binaries and append code coverage data to a file
+  - `xcrun --run llvm-cov show <binary_path> --instr-profile <merged_profdata_file> >> <output_file>`
+- The file can then be passed to `sonar-scanner`
+  - `sonar.cfamily.llvm-cov.reportPath` (for Obj-C code coverage)
+  - `sonar.swift.coverage.reportPaths` (for Swift code coverage)
+
 # cococo - **co**de **co**verage **co**nverter from Xcode 11 to SonarQube
 
 [![mysugr](https://circleci.com/gh/mysugr/cococo.svg?style=svg)](https://circleci.com/gh/mySugr/cococo)
